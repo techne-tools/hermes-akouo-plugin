@@ -1,0 +1,17 @@
+[project]
+name = "hermes-akouo-plugin"
+version = "0.9.0"
+description = "AKOÚŌ Hermes Plugin — 17 epistemically-disciplined listening modes for Hermes Agent"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Chris Wenn", email = "chris@techne-tools.org"}
+]
+
+[project.urls]
+Homepage = "https://github.com/techne-tools/hermes-akouo-plugin"
+Repository = "https://github.com/techne-tools/hermes-akouo-plugin.git"
+Upstream = "https://github.com/sonicfieldlabs/akouo"
+
+[tool.hermes-plugin]
+entry_point = "src.__init__:register"

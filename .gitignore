@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.venv/
+venv/
+
+# Hermes
+*.hermes_skill_cache

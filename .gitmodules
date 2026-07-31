@@ -1,0 +1,3 @@
+[submodule "akouo"]
+	path = akouo
+	url = https://github.com/sonicfieldlabs/akouo.git
