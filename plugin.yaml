@@ -1,0 +1,20 @@
+name: akouo
+version: 0.9.1
+description: |
+  AKOÚŌ — 17 epistemically-disciplined listening modes for Hermes Agent.
+  Registers 4 tools (akouo_route, akouo_manifest, akouo_covenant,
+  akouo_validate) and 18 slash commands (/listen, /forensic, /covenant,
+  /one-sound-many-ears, ...) for sonic analysis via the AKOÚŌ v0.9
+  listening framework. Skills are distributed as a git submodule and
+  symlinked into ~/.hermes/skills/ on session start.
+
+  Part of the techne-tools organisation (MIT).
+author: techne-tools
+kind: standalone
+provides_tools:
+  - akouo_route
+  - akouo_manifest
+  - akouo_covenant
+  - akouo_validate
+provides_hooks:
+  - on_session_start

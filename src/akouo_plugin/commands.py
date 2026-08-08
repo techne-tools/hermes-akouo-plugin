@@ -12,7 +12,6 @@ from typing import Any
 
 
 async def handle_command(
-    ctx,
     command_name: str,
     args: str,
     info: dict[str, Any],
@@ -21,7 +20,6 @@ async def handle_command(
     """Handle an AKOÚŌ slash command invocation.
 
     Args:
-        ctx: Hermes command context
         command_name: The command name (e.g., "listen", "forensic")
         args: The user's argument string
         info: Command metadata (skills, purpose)

@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "hermes-akouo-plugin"
 version = "0.9.1"
@@ -8,10 +12,13 @@ authors = [
     {name = "Chris Wenn", email = "chris@techne-tools.org"}
 ]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project.urls]
 Homepage = "https://github.com/techne-tools/hermes-akouo-plugin"
 Repository = "https://github.com/techne-tools/hermes-akouo-plugin.git"
 Upstream = "https://github.com/sonicfieldlabs/akouo"
 
-[tool.hermes-plugin]
-entry_point = "src.__init__:register"
+[project.entry-points."hermes_agent.plugins"]
+akouo = "akouo_plugin"
