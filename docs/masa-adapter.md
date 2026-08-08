@@ -123,6 +123,31 @@ documents its loss behavior:
   version, and both upstream repository URLs, so any record can be traced
   back to the tooling and upstreams that produced it.
 
+## Relations and lineage
+
+The adapter emits first-class `masa:Relation` objects so the record's
+causal structure is explicit, using predicates registered in the MASA
+ontology (`packages/core/src/generated/ontology.ts`, 0.1.0):
+
+| Predicate | Subject | Object | Meaning |
+|---|---|---|---|
+| `masa:listened-as` | representation | listening pass | The representation was approached under the declared listening pass |
+| `masa:part-of` | listening pass | encounter / aperture | The pass was carried out through the encounter and aperture |
+| `masa:attributed-to` | claim | actor | The claim carries an attribution to the listening actor |
+| `masa:measured-from` | measured claim | representation | The measurement used the representation as evidence |
+| `masa:speculates-about` | speculative claim | representation | The claim is a declared speculative proposition |
+
+**Lineage limitation (protocol-level, v0.1.0):** the MASA lineage tool
+(`matter.trace_lineage`) only traverses predicates with a registered
+`lineageDirection`, which in v0.1.0 are the material-derivation set
+(`derived-from`, `granulated-from`, `mapped-from`, `generated-by`, ...).
+Epistemic relations are preserved in the record and returned by
+`matter.inspect`, but are not yet traversed as causal edges. A candidate
+RFC to MASA would register `lineageDirection` for `masa:listened-as`
+(and possibly `masa:measured-from`, `masa:speculates-about`) so
+listening-pass graphs become traversable. This is a protocol-level
+limitation, not an adapter defect.
+
 ## Policy and runtime-authority boundaries
 
 - This adapter performs **mapping only**. It does not transform audio,
