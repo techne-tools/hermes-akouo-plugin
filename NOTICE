@@ -1,0 +1,44 @@
+# NOTICE
+
+## Upstream attribution
+
+This repository is a **derivative integration** of the AKOÚŌ listening
+framework. It is not a fork, and it does not claim authorship of the
+upstream work.
+
+### AKOÚŌ — Operational ears for the agentic era
+
+- **Author:** emeisazam (eme) — https://github.com/emeisazam
+- **Organisation:** Sonic Field Labs — https://github.com/sonicfieldlabs
+- **Repository:** https://github.com/sonicfieldlabs/akouo
+- **Version integrated:** v0.9.1 (2026-08-02)
+- **License:** MIT — Copyright (c) 2026 akoúō contributors
+
+AKOÚŌ is the work of emeisazam, a non-binary designer and developer from
+the global south. All listening modes, claim taxonomies, schemas, commands,
+presets, and the listening-covenant concept originate with that project and
+are used here under the MIT License. The upstream copyright notice and
+permission notice are reproduced in full in `LICENSE` and must remain
+attached to any substantial portion of the derived material.
+
+### MASA — Sound Matter Aware protocol
+
+- **Organisation:** Sonic Field Labs — https://github.com/sonicfieldlabs
+- **Repository:** https://github.com/sonicfieldlabs/MASA
+- **Version integrated:** v0.1.0 (2026-07-27)
+- **License:** MIT — Copyright (c) 2026 Sonic Field Labs
+
+The AKOÚŌ→MASA adapter in `src/masa_adapter.py` maps AKOÚŌ listening
+outputs into MASA matter records. MASA is a project-agnostic contract;
+the adapter is a mapping, not a claim that AKOÚŌ terms are equivalent to
+MASA Core terms.
+
+## Relationship statement
+
+This integration is part of Chris Wenn's practice-as-research at the
+University of the Arts Sharjah (agentic stack for performance research).
+It leverages emeisazam's listening framework as a research instrument.
+It is an inflection of the upstream work for a specific research context,
+not an appropriation: authorship of the listening framework remains with
+emeisazam and Sonic Field Labs, and is cited as such throughout this
+repository.

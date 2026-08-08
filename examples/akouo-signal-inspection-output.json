@@ -1,0 +1,80 @@
+{
+  "object_listened_to": "A field recording of a construction site at dusk, with a persistent low-frequency hum and periodic metallic impacts.",
+  "input_type": "audio_file",
+  "listening_mode": "signal-inspection-listening",
+  "listening_claims": {
+    "heard": [
+      {
+        "statement": "A persistent low hum and abrupt impacts are audible in the supplied file.",
+        "confidence": "medium",
+        "basis": "Audible content, not source identification"
+      }
+    ],
+    "measured": [
+      {
+        "statement": "Energy concentration below 100 Hz and peak clipping may be reported only if verified by signal inspection.",
+        "confidence": "high",
+        "basis": "Waveform, meter, or spectrogram evidence"
+      }
+    ],
+    "inferred": [
+      {
+        "statement": "Electrical hum, dynamic compression, or an overloaded recording chain are possible but unconfirmed causes.",
+        "confidence": "low",
+        "basis": "Technical pattern consistent with multiple causes"
+      }
+    ],
+    "interpreted": [
+      {
+        "statement": "The degraded technical condition may shape the listener's sense of pressure or instability.",
+        "confidence": "medium",
+        "basis": "Technical reading, not proof of intent"
+      }
+    ],
+    "speculative": [],
+    "undetermined": [
+      {
+        "statement": "Source, intention, location, playback conditions, and cultural meaning remain unknown.",
+        "confidence": "high",
+        "basis": "Unavailable contextual evidence"
+      }
+    ]
+  },
+  "what_appears": [
+    "A low-frequency hum below 100 Hz",
+    "Periodic metallic impacts with clipping"
+  ],
+  "what_remains_hidden": [
+    "Source of the hum",
+    "Recording location and date",
+    "Playback conditions"
+  ],
+  "mediations": [
+    "Field recorder microphone",
+    "ADC and codec chain",
+    "File format and sample rate"
+  ],
+  "risks": [
+    "Confusing model perception with human hearing",
+    "Over-attributing cause from spectral pattern alone"
+  ],
+  "main_reading": "The file shows a low-frequency hum and clipped impacts; cause and source remain undetermined.",
+  "alternative_reading": "The hum could be electrical, mechanical, or environmental; the impacts could be construction or incidental.",
+  "recommended_next_mode": "acoulogical-object-listening",
+  "akouo_version": "0.9.1",
+  "apparatus": {
+    "channels": ["mono"],
+    "preprocessing": ["normalization", "spectrogram"],
+    "sample_rate": 48000
+  },
+  "listener": {
+    "kind": "agent",
+    "name": "Hermes AKOÚŌ signal-inspection pass",
+    "process": "akouo-router → signal-inspection-listening"
+  },
+  "memory": {},
+  "covenant": {
+    "id": "urn:uuid:00000000-0000-4000-8000-0000000000c0",
+    "withheld": ["recording location", "recording date"]
+  }
+}

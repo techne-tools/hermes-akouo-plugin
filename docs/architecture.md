@@ -1,9 +1,25 @@
 # AKOÚŌ Hermes Plugin — Architecture Reference
 
-**Status:** Active (v0.9.0)
+**Status:** Active (v0.9.1)
 **Plugin repo:** `github.com/techne-tools/hermes-akouo-plugin`
-**Upstream:** `github.com/sonicfieldlabs/akouo`
+**Upstream:** `github.com/sonicfieldlabs/akouo` — by **emeisazam (eme)** / Sonic Field Labs, MIT
+**MASA:** `github.com/sonicfieldlabs/MASA` — by Sonic Field Labs, MIT
 **Part of:** Agent Stack for Performance Research
+
+## Attribution
+
+The AKOÚŌ listening framework — modes, claim taxonomies, schemas, commands,
+presets, and the listening-covenant concept — is the work of
+**emeisazam (eme)**, a non-binary designer and developer from the global
+south, published under [Sonic Field Labs](https://github.com/sonicfieldlabs).
+This plugin is a **derivative integration** of that work, used under the
+MIT License. It leverages AKOÚŌ as a research instrument in Chris Wenn's
+practice-as-research at the University of the Arts Sharjah; it does not
+appropriate it. Full attribution: [NOTICE](../NOTICE) and [LICENSE](../LICENSE).
+
+The MASA Sound Matter Aware protocol (v0.1.0) is by Sonic Field Labs, MIT.
+The AKOÚŌ→MASA adapter (`src/masa_adapter.py`) maps AKOÚŌ outputs into
+MASA records; it is a mapping, not a claim of equivalence.
 
 ## Architecture Decisions
 
@@ -79,6 +95,7 @@ hermes-akouo-plugin/
 
 - **Not a fork.** The plugin repo references `sonicfieldlabs/akouo` as a git submodule.
 - **Symlinks, not copies.** Skills are symlinked from the submodule into `~/.hermes/skills/`.
+- **Attribution.** The upstream work is by emeisazam (eme) / Sonic Field Labs, MIT. See [NOTICE](../NOTICE) and [LICENSE](../LICENSE).
 - **Contribute back.** Bugs in schemas, gaps in the manifest, or features the upstream should expose are PR'd back to `sonicfieldlabs/akouo`.
 - **License.** Upstream is MIT. Plugin is MIT.
 
@@ -86,5 +103,6 @@ hermes-akouo-plugin/
 
 | Plugin Version | AKOÚŌ Version | Changes |
 |---|---|---|
+| 0.9.1 | v0.9.1 | Embodied heard-claim boundary; AKOÚŌ→MASA adapter; explicit emeisazam attribution |
 | 0.9.0 | v0.9.0 | Accountable listening: covenant parsing, sovereign listening mode |
 | 0.7.0 | v0.7.0 | Initial plugin: 17 modes, 18 commands, 4 tools |

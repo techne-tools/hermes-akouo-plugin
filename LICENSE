@@ -1,6 +1,8 @@
 MIT License
 
 Copyright (c) 2026 Chris Wenn / techne-tools
+Copyright (c) 2026 akoúō contributors (AKOÚŌ listening framework, by emeisazam / Sonic Field Labs)
+Copyright (c) 2026 Sonic Field Labs (MASA Sound Matter Aware protocol)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +21,32 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Upstream notices
+
+This repository integrates derivative material from two upstream projects.
+Their copyright notices are reproduced here as required by the MIT License.
+
+### AKOÚŌ — https://github.com/sonicfieldlabs/akouo
+
+MIT License
+
+Copyright (c) 2026 akoúō contributors
+
+AKOÚŌ is authored by emeisazam (eme), a non-binary designer and developer
+from the global south, published under Sonic Field Labs. The listening
+modes, claim taxonomies, schemas, commands, presets, and listening-covenant
+concept used in this repository originate with that project.
+
+### MASA — https://github.com/sonicfieldlabs/MASA
+
+MIT License
+
+Copyright (c) 2026 Sonic Field Labs
+
+The Sound Matter Aware protocol (v0.1.0) is a project-agnostic contract
+for describing, listening to, measuring, transforming, and exchanging
+sound as matter. The adapter in `src/masa_adapter.py` maps AKOÚŌ outputs
+into MASA records; it is a mapping, not a claim of equivalence.

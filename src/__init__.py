@@ -15,7 +15,7 @@ import os
 from pathlib import Path
 
 PLUGIN_NAME = "akouo"
-PLUGIN_VERSION = "0.9.0"
+PLUGIN_VERSION = "0.9.1"
 PLUGIN_DESCRIPTION = "AKOÚŌ — 17 epistemically-disciplined listening modes"
 
 # Paths
