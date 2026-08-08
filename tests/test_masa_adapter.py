@@ -112,6 +112,39 @@ def test_record_shape():
         assert c["listeningPassRef"] == record["listeningPasses"][0]["id"]
 
 
+def test_relations_use_ontology_vocabulary():
+    """Relations must use predicates registered in the MASA ontology.
+
+    The schema enforces the predicate pattern but the ontology
+    (packages/core/src/generated/ontology.ts) defines semantics. Invented
+    predicates would validate but carry no meaning.
+    """
+    record = akouo_output_to_masa_record(EXAMPLE)
+    preds = {r["predicate"] for r in record["relations"]}
+    assert preds <= {
+        "masa:listened-as",
+        "masa:attributed-to",
+        "masa:measured-from",
+        "masa:speculates-about",
+        "masa:part-of",
+    }, preds
+    # every relation has the required shape
+    for r in record["relations"]:
+        assert r["type"] == "masa:Relation"
+        assert r["subject"] and r["object"] and r["assertedBy"]
+        assert r["basis"] and r["extensions"] == {}
+
+
+def test_relations_cover_claims():
+    """Every claim is attributed to the actor and linked to the representation."""
+    record = akouo_output_to_masa_record(EXAMPLE)
+    claim_ids = {c["id"] for c in record["claims"]}
+    attributed = {
+        r["subject"] for r in record["relations"] if r["predicate"] == "masa:attributed-to"
+    }
+    assert claim_ids == attributed
+
+
 if __name__ == "__main__":
     passed = 0
     failed = 0

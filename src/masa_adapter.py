@@ -301,6 +301,80 @@ def _map_modes(listening_mode: str) -> list[str]:
     return [f"akouo:{listening_mode}"]
 
 
+def _map_relations(
+    *,
+    actor_id: str,
+    encounter_id: str,
+    aperture_id: str,
+    listening_pass_id: str,
+    representation_id: str,
+    claims: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Emit first-class MASA Relation objects using the ontology vocabulary.
+
+    MASA Relation requires id, type, subject, predicate, object, assertedBy,
+    createdAt, basis (minItems 1), extensions (definitions.schema.json,
+    0.1.0). Predicates must match the ontology registry
+    (packages/core/src/generated/ontology.ts) — the schema enforces the
+    pattern but the ontology defines semantics.
+
+    Epistemic predicates used here (all registered in the ontology):
+      - masa:listened-as      — "The subject was approached as the object
+                                 under a declared listening pass" (listening)
+      - masa:attributed-to    — "The subject carries an attribution to the
+                                 object Actor" (responsibility)
+      - masa:measured-from    — "The subject measurement used the object as
+                                 evidence" (evidence)
+      - masa:speculates-about — "The subject is a declared speculative
+                                 proposition about the object" (epistemic)
+
+    Lineage note: the lineage tool (matter.trace_lineage) only traverses
+    predicates with a registered lineageDirection, which in v0.1.0 are the
+    material-derivation set (derived-from, granulated-from, mapped-from,
+    generated-by, ...). Epistemic relations are preserved in the record and
+    returned by inspect, but are not yet traversed as causal edges. That is
+    a protocol-level limitation, not an adapter defect. A candidate RFC to
+    MASA would register lineageDirection for masa:listened-as (and possibly
+    masa:measured-from, masa:speculates-about) so listening-pass graphs
+    become traversable.
+    """
+    relations: list[dict[str, Any]] = []
+    now = _now()
+
+    def relation(subject: str, predicate: str, obj: str, basis: str) -> None:
+        relations.append(
+            {
+                "id": _urn(),
+                "type": "masa:Relation",
+                "subject": subject,
+                "predicate": predicate,
+                "object": obj,
+                "assertedBy": actor_id,
+                "createdAt": now,
+                "basis": [{"ref": representation_id, "role": "representation", "locator": basis}],
+                "extensions": {},
+            }
+        )
+
+    # The representation was approached under the listening pass.
+    relation(representation_id, "masa:listened-as", listening_pass_id, "listening pass")
+    # The listening pass was carried out through the encounter and aperture.
+    relation(listening_pass_id, "masa:part-of", encounter_id, "listening pass encounter")
+    relation(listening_pass_id, "masa:part-of", aperture_id, "listening pass aperture")
+    # Each claim carries an attribution to the listening actor.
+    for claim in claims:
+        claim_id = claim["id"]
+        relation(claim_id, "masa:attributed-to", actor_id, "claim actor")
+        kind = claim["kind"]
+        if kind == "measured":
+            relation(claim_id, "masa:measured-from", representation_id, "claim representation")
+        elif kind == "speculative":
+            relation(claim_id, "masa:speculates-about", representation_id, "claim representation")
+        else:
+            relation(claim_id, "masa:listened-as", representation_id, "claim representation")
+    return relations
+
+
 def _map_encounter(
     output: dict[str, Any],
     *,
@@ -487,6 +561,15 @@ def akouo_output_to_masa_record(
     for c in claims:
         c["listeningPassRef"] = listening_pass["id"]
 
+    relations = _map_relations(
+        actor_id=actor_id,
+        encounter_id=encounter["id"],
+        aperture_id=aperture["id"],
+        listening_pass_id=listening_pass["id"],
+        representation_id=representation_id,
+        claims=claims,
+    )
+
     record = {
         "$schema": "https://masa.sonicfield.org/schemas/0.1.0/matter-record.schema.json",
         "masaVersion": "0.1.0",
@@ -556,7 +639,7 @@ def akouo_output_to_masa_record(
         "regions": [],
         "observations": [],
         "mappings": [],
-        "relations": [],
+        "relations": relations,
         "policies": [
             {
                 "id": policy_id,
